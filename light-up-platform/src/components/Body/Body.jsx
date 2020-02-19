@@ -1,11 +1,11 @@
 import React from 'react';
 import css from './Body.module.css';
 
-const Body = () =>{
+const Body = () => {
 
-    return(
+    return (
         <div className={css.Body}>
-            <p>Body goes here</p>
+
         </div>
     )
 }

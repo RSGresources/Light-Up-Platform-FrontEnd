@@ -1,6 +1,5 @@
-
-.Body{
-    background-color: blue;
+.Body {
+    color: black;
     flex-grow: 1;
     padding: 4% 4% 4% 4%;
     height: 100%;
