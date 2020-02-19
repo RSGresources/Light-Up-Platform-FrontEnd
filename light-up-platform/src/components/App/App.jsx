@@ -8,7 +8,6 @@ import PodcastPlaylist from '../PodcastPage/PodcastPlayList/PodcastPlaylist'
 import PageNotFound from '../ErrorPages/PageNotFound/PageNotFound'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 const App = () => {
