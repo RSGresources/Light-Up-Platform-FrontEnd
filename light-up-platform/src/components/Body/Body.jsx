@@ -1,12 +1,12 @@
 import React from 'react';
 import css from './Body.module.css';
 
-const Body = () => {
+const Body = ({ children }) => {
 
     return (
-        <div className={css.Body}>
-
-        </div>
+        <main className={css.Body}>
+            {children}
+        </main>
     )
 }
 
