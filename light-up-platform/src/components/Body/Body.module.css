@@ -6,3 +6,9 @@
     overflow: auto;
     max-height: 100vh;
 }
+
+@media screen and (min-width: 800px) {
+    .Body {
+        padding: 4% 19% 4% 19%;
+    }
+}

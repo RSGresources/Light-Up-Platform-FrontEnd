@@ -1,0 +1,14 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.body-title-text::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.body-title-text {
+    font-size: 2vh;
+    font-weight: bold;
+    overflow: scroll;
+    max-height: 9vh;
+    max-width: 49vw;
+    -ms-overflow-style: none;
+}

@@ -2,7 +2,7 @@ const availablePodcasts = [{
         id: 0,
         dateRecorded: "10/12/2019",
         timeRecorded: "3:00pm",
-        title: "Talking About Finding Yourself",
+        title: "Talking About Finding Yourself This is Brad adding extra text to see what happens and when there is too much text ",
         author: "Karren McDean",
         videoURL: ""
     },
