@@ -2,9 +2,7 @@ import React from 'react';
 import podcastsMock from '../../../resources/mock-data/availablePodcasts'
 import PodcastVideoCard from '../PodcastVideoCard/PodcastVideoCard'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import color from '@material-ui/core/colors/amber';
 import RandomColorSelector from '../../../utils/RandomColorSelector'
-
 
 const ITEMS_PER_ROW = 2
 const ROWS_PER_PAGE = Math.ceil(podcastsMock.length / ITEMS_PER_ROW)

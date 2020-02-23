@@ -19,7 +19,6 @@ const useStyles = makeStyles({
         backgroundColor: '#E9E9E9',
         boxShadow:
             '0 4px 4px -2px rgba(0,0,0,0.54), 0 4px 24px -2px rgba(0, 0, 0, 0.2)',
-
     },
     headerContainer: {
         display: 'flex',
