@@ -69,13 +69,13 @@ const useStyles = makeStyles({
     },
 });
 
-const PodcastVideoCard = ({ dateRecorded, timeRecorded, title, author, color }) => {
+const PodcastVideoCard = ({ id, dateRecorded, timeRecorded, title, author, color, onClickCallback }) => {
 
     const classes = useStyles();
 
     return (
 
-        <Card className={classes.root}>
+        <Card onClick={() => onClickCallback(id)} className={classes.root}>
             <CardContent className={classes.content} >
                 <div className={classes.headerContainer} style={{ backgroundColor: color }}>
                     <div className={classes.headerContents}>
