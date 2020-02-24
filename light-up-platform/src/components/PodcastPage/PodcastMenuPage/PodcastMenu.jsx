@@ -14,7 +14,7 @@ const PodcastMenu = () => {
 
     const [cardSelected, setCardSelected] = useState(false);
     const [selectedId, setSelectedId] = useState();
-    const [podcasts, error] = useGetPodcasts();
+    let [podcasts, error] = useGetPodcasts();
 
     const handleCardSelected = (id) => {
         setCardSelected(true);
@@ -26,9 +26,7 @@ const PodcastMenu = () => {
     }
 
     if (!podcasts) {
-        return (
-            <LoadSpinner color='#C63A3A' />
-        )
+        return <LoadSpinner color='#C63A3A' />
     }
 
     if (cardSelected) {
@@ -37,15 +35,19 @@ const PodcastMenu = () => {
 
 
     const ROWS_PER_PAGE = Math.ceil(podcasts.length / ITEMS_PER_ROW)
+    let start = 0
+    let rowKeyCount = 0
     return (
 
         <div className="container">
             {
-                Array(ROWS_PER_PAGE).fill().map((_, i) => i += 1).map((i) => {
-                    const data = podcasts.splice(0, ITEMS_PER_ROW)
+                Array(ROWS_PER_PAGE).fill().map(() => {
+                    const data = podcasts.slice(start, start + ITEMS_PER_ROW)
+                    start += ITEMS_PER_ROW
+                    rowKeyCount++
 
                     return (
-                        <div className="row" key={i}>
+                        <div className="row" key={rowKeyCount}>
                             {data.map((item, j) => {
                                 return (
                                     <div className="col-sm-6" key={j}>
