@@ -4,7 +4,7 @@ const availablePodcasts = [{
         timeRecorded: "3:00pm",
         title: "Talking About Finding Yourself This is Brad adding extra text to see what happens and when there is too much text ",
         author: "Karren McDean",
-        videoURL: ""
+        videoURL: "https://www.youtube.com/embed/CZeulkp1ClA"
     },
     {
         id: 1,
@@ -12,7 +12,7 @@ const availablePodcasts = [{
         timeRecorded: "1:00pm",
         title: "Free Yourself from the Machine",
         author: "Alison Ellis",
-        videoURL: ""
+        videoURL: "https://www.youtube.com/embed/Ql9jUgubP4k"
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ const availablePodcasts = [{
         timeRecorded: "3:15pm",
         title: "How to Shine Without Feeling Guilty",
         author: "Tome Fletcher",
-        videoURL: ""
+        videoURL: "https://www.youtube.com/embed/oOIjwhYUbHM"
     },
     {
         id: 3,

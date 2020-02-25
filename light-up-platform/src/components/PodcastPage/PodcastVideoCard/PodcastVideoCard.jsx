@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { CardActionArea } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -75,39 +76,41 @@ const PodcastVideoCard = ({ id, dateRecorded, timeRecorded, title, author, color
 
     return (
 
-        <Card onClick={() => onClickCallback(id)} className={classes.root}>
+        <Card className={classes.root}>
             <CardContent className={classes.content} >
-                <div className={classes.headerContainer} style={{ backgroundColor: color }}>
-                    <div className={classes.headerContents}>
-                        {dateRecorded}
-                    </div>
-                    <div className={classes.headerContents}>
-                        {timeRecorded}
-                    </div>
-                </div>
-
-                <div className='row'>
-                    <div className='col-4'>
-                        <div className={classes.BodyIcon} >
-                            <img
-                                className={classes.media}
-                                src={podcastVidImg}
-                                alt="Youtube Podcast video Icon"
-                            />
+                <CardActionArea onClick={() => onClickCallback(id)}>
+                    <div className={classes.headerContainer} style={{ backgroundColor: color }}>
+                        <div className={classes.headerContents}>
+                            {dateRecorded}
+                        </div>
+                        <div className={classes.headerContents}>
+                            {timeRecorded}
                         </div>
                     </div>
 
-                    <div className='col-8'>
-                        <div className={classes.BodyTexts}>
-                            <Typography className={classes.BodyTitle} variant='body1'>
-                                {title}
-                            </Typography>
-                            <Typography className={classes.BodyAuthor} variant='body1'>
-                                {author}
-                            </Typography>
+                    <div className='row'>
+                        <div className='col-4'>
+                            <div className={classes.BodyIcon} >
+                                <img
+                                    className={classes.media}
+                                    src={podcastVidImg}
+                                    alt="Youtube Podcast video Icon"
+                                />
+                            </div>
+                        </div>
+
+                        <div className='col-8'>
+                            <div className={classes.BodyTexts}>
+                                <Typography className={classes.BodyTitle} variant='body1'>
+                                    {title}
+                                </Typography>
+                                <Typography className={classes.BodyAuthor} variant='body1'>
+                                    {author}
+                                </Typography>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </CardActionArea>
             </CardContent>
         </Card>
     )

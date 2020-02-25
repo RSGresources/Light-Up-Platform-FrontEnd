@@ -6,19 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoadSpinner from '../../LoadSpinner/LoadSpinner'
 import RandomColorSelector from '../../../utils/RandomColorSelector'
 import useGetPodcasts from '../../../utils/customHooks/useGetPodcasts';
+import { useHistory, withRouter } from 'react-router-dom'
 
 const ITEMS_PER_ROW = 2
 const Colors = new RandomColorSelector();
 
 const PodcastMenu = () => {
 
-    const [cardSelected, setCardSelected] = useState(false);
-    const [selectedId, setSelectedId] = useState();
     let [podcasts, error] = useGetPodcasts();
+    const history = useHistory();
 
     const handleCardSelected = (id) => {
-        setCardSelected(true);
-        setSelectedId(id);
+        history.push('/PodcastPlaylist', { data: { playlist: podcasts, selectedId: id }, source: PodcastMenu.name })
     }
 
     if (error) {
@@ -29,9 +28,6 @@ const PodcastMenu = () => {
         return <LoadSpinner color='#C63A3A' />
     }
 
-    if (cardSelected) {
-        return <PodcastPlaylist playlist={podcasts} selectionId={selectedId} />
-    }
 
 
     const ROWS_PER_PAGE = Math.ceil(podcasts.length / ITEMS_PER_ROW)
@@ -70,4 +66,4 @@ const PodcastMenu = () => {
     )
 }
 
-export default PodcastMenu
+export default withRouter(PodcastMenu)
