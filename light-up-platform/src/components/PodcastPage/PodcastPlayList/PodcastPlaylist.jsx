@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import AccessDeniedPage from '../../ErrorPages/AccessDeniedPage/AccessDeniedPage'
+import NoContentAvailablePage from '../../ErrorPages/NoContentAvailablePage/NoContentAvailablePage';
+
 
 const PodcastPlaylist = () => {
 
     const { state } = useLocation();
 
-    const [playlist, setPlaylist] = useState(state.data.playlist)
-    const [selectedId, setSelectedId] = useState(state.data.selectedId)
-    const [source, setSource] = useState(state.source)
-
-    console.log(playlist, selectedId, source)
-
-    if (source !== "PodcastMenu" || playlist === undefined || selectedId === undefined) {
-        return <AccessDeniedPage />;
+    if (state === undefined || state.source !== "PodcastMenu" || state.data.playlist === undefined || state.data.selectedId === undefined) {
+        return <AccessDeniedPage />
     };
 
 
     const getVideo = () => {
-        let vidURL = ''
-        playlist.forEach(data => {
-            if (data.id === selectedId) {
+        let vidURL = undefined
+        state.data.playlist.forEach(data => {
+            if (data.id === state.data.selectedId && data.videoURL) {
                 vidURL = data.videoURL + '?autoplay=1'
             }
         });
+
         return vidURL
     }
 
-
+    const URL = getVideo()
+    if (URL === undefined) {
+        return <NoContentAvailablePage />
+    }
     return (
         <iframe width="560"
             height="315"
