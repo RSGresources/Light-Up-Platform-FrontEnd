@@ -24,11 +24,8 @@ import LoadingSpinner from '../LoadSpinner/LoadSpinner';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    width: '89%',
+    maxWidth: '87vw',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -43,6 +40,19 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  gridItem:{
+      display: 'flex',
+      justifyContent: 'center'
+  },
+  cardContent: {
+      padding: 0
+  },
+  cardContentDetails:{
+    padding: '2% 2% 2% 2%'
+  },
+  cardContentmedia: {
+    // 16:9
+     },
 }));
 
 const Podcasts = () => {
@@ -68,29 +78,24 @@ const Podcasts = () => {
 
     <Grid container spacing={3}>
         {podcastList.map((podcast)=> {
-            console.log(`${podcast.videoURL}?autoplay=1`)
             return (
-                <Grid item xs={12}>
+                <Grid className={classes.gridItem} item xs={12}>
                     <Card className={classes.root}>
-                        <CardContent>
-                            <ReactPlayer
-                                url={podcast.videoURL}
-                                controls={true}
-                                light={false}
-                                height='232px'
-                                width='100%'
-                            />
-                            {/* <iframe width="560"
-                                height="315"
-                                title='test-vid'
-                                src={`${podcast.videoURL}?autoplay=1`}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen>
-                            </iframe> */}
-                            <Typography variant="body2" color="textSecondary" component="p">
-                            content
-                            </Typography>
+                        <CardContent className={classes.cardContent}>
+                            <div className={classes.media}>
+                                <ReactPlayer
+                                    url={podcast.videoURL}
+                                    controls={true}
+                                    light={false}
+                                    height='232px'
+                                    width='100%'
+                                />
+                            </div>
+                            <div className={classes.cardContentDetails}>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                content
+                                </Typography>
+                            </div>
                         </CardContent>
                         <CardActions disableSpacing>
                             <IconButton
