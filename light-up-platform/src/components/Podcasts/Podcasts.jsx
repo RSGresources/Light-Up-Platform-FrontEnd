@@ -30,14 +30,14 @@ const Podcasts = () => {
   return <h3 style={{color: 'red'}}>{PodcastListError.message}</h3>
   }
 
-  const timeoutVal = 500
+  let timeoutVal = 500
   return (
 
     <Grid container spacing={3}>
         {podcastList.map((podcast, index)=> {
             return (
                 <Grid className={classes.gridItem} item xs={12}>
-                   <PodcastCard podcast={podcast} timeout={600} />
+                   <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
                 </Grid>
         )})}
     </Grid>

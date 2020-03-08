@@ -68,6 +68,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '50%',
     marginRight: '2%'
   },
+  cardAuthorText:{
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
   cardLightUpsIconImg: {
       width: '69%'
   },
@@ -124,7 +129,7 @@ const PodcastCard = ({podcast, timeout}) => {
                     <ReactPlayer
                         url={podcast.videoURL}
                         controls={true}
-                        light={false}
+                        light={true}
                         height='232px'
                         width='100%'
                     />
@@ -146,7 +151,7 @@ const PodcastCard = ({podcast, timeout}) => {
             <CardActions classes={{root:classes.cardActions}} disableSpacing>
 
                 <img className={classes.profilePicImg} src={podcast.authorPicURL} alt='profile pic placeholder' />
-                <Typography className='author' variant="body1" color="textSecondary" component="p">
+                <Typography className={classes.cardAuthorText} variant="body1" color="textSecondary" component="p">
                     {podcast.author}
                 </Typography>
 

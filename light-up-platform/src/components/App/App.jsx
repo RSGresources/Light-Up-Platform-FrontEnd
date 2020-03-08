@@ -1,6 +1,7 @@
 import React from 'react';
 import AppCss from './App.module.css';
-import AppBar from '../AppBar/AppBar'
+import AppBar from '../AppBar/AppBar';
+import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
 import Webinars from '../Webinars/Webinars';
 import Courses from '../Courses/Courses';
@@ -21,39 +22,41 @@ const App = () => {
       <Router>
         <div className={AppCss.App}>
           <AppBar />
-            <Switch>
-              <Route exact path="/">
-                <Podcasts />
-              </Route>
-              <Route path='/Webinars'>
-                  <Webinars />
-              </Route>
-              <Route path='/Courses'>
-                  <Courses />
-              </Route>
-              <Route path='/Library'>
-                  <Library />
-              </Route>
-              <Route path='/Forums'>
-                  <Forums />
-              </Route>
-              <Route path='/Training'>
-                  <Training />
-              </Route>
-              <Route path='/WeeklyReignition'>
-                  <WeeklyReignition />
-              </Route>
-              <Route path='/AboutLightUp'>
-                  <AboutLightUp />
-              </Route>
-              <Route path='/Subscriptions'>
-                  <Subscriptions />
-              </Route>
-              <Route path="*">
-                <PageNotFound />
-              </Route>
-            </Switch>
-          <Footer />
+          <Body>
+              <Switch>
+                <Route exact path="/">
+                  <Podcasts />
+                </Route>
+                <Route path='/Webinars'>
+                    <Webinars />
+                </Route>
+                <Route path='/Courses'>
+                    <Courses />
+                </Route>
+                <Route path='/Library'>
+                    <Library />
+                </Route>
+                <Route path='/Forums'>
+                    <Forums />
+                </Route>
+                <Route path='/Training'>
+                    <Training />
+                </Route>
+                <Route path='/WeeklyReignition'>
+                    <WeeklyReignition />
+                </Route>
+                <Route path='/AboutLightUp'>
+                    <AboutLightUp />
+                </Route>
+                <Route path='/Subscriptions'>
+                    <Subscriptions />
+                </Route>
+                <Route path="*">
+                  <PageNotFound />
+                </Route>
+              </Switch>
+            </Body>
+            <Footer />
         </div>
       </Router>
     </div>
