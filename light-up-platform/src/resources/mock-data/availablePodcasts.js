@@ -4,7 +4,10 @@ const availablePodcasts = [{
         timeRecorded: "3:00pm",
         title: "Talking About Finding Yourself This is Brad adding extra text to see what happens and when there is too much text ",
         author: "Karren McDean",
-        videoURL: "https://www.youtube.com/embed/CZeulkp1ClA"
+        authorPicURL: '/images/profiles/profile1.jpg',
+        lightUps: 30,
+        videoURL: "https://www.youtube.com/embed/CZeulkp1ClA",
+        description: "As all of us know, living from Light-Up is about shining brighter ourselves, and that in turn invites others to do the same. So this foundation part of the training focuses on connecting with your own light (soul, essence, core, inner knowing) and deepening your own understanding of yourself and your fellow trainees."
     },
     {
         id: 1,
@@ -12,7 +15,10 @@ const availablePodcasts = [{
         timeRecorded: "1:00pm",
         title: "Free Yourself from the Machine",
         author: "Alison Ellis",
-        videoURL: "https://www.youtube.com/embed/Ql9jUgubP4k"
+        authorPicURL: '/images/profiles/profile2.jpg',
+        lightUps: 45,
+        videoURL: "https://www.youtube.com/embed/Ql9jUgubP4k",
+        description: 'The course is both practical and profound, full of fun, exploration, realisations, laughter and connection.'
     },
     {
         id: 2,
@@ -20,16 +26,22 @@ const availablePodcasts = [{
         timeRecorded: "3:15pm",
         title: "How to Shine Without Feeling Guilty",
         author: "Tome Fletcher",
-        videoURL: "https://www.youtube.com/embed/oOIjwhYUbHM"
+        authorPicURL: '/images/profiles/profile3.jpg',
+        lightUps: 15,
+        videoURL: "https://www.youtube.com/embed/oOIjwhYUbHM",
+        description: 'After completion of the two residential programmes, you will receive on-going support and development from your trainers – as well as your fellow trainees and the wider Activator team.'
     },
-    // {
-    //     id: 3,
-    //     dateRecorded: "09/19/2019",
-    //     timeRecorded: "3:00pm",
-    //     title: "Finding Direction After Trauma",
-    //     author: "Ian Stanger",
-    //     videoURL: ""
-    // },
+    {
+        id: 3,
+        dateRecorded: "09/19/2019",
+        timeRecorded: "3:00pm",
+        title: "Finding Direction After Trauma",
+        author: "Ian Stanger",
+        authorPicURL: '/images/profiles/profile4.jpg',
+        lightUps: 7,
+        videoURL: "https://www.youtube.com/embed/JgvyzIkgxF0",
+        description: "If you’re wondering what the training looks like In practical terms, the course consists of a five day residential, followed one month later by a three day residential, currently held at the Sanctuary, Mel’s home in the beautiful rural Charentes area of France, the place where Light Up was ‘birthed’."
+    },
     // {
     //     id: 4,
     //     dateRecorded: "09/10/2019",

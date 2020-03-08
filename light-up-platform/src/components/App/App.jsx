@@ -53,6 +53,7 @@ const App = () => {
                 <PageNotFound />
               </Route>
             </Switch>
+          <Footer />
         </div>
       </Router>
     </div>
