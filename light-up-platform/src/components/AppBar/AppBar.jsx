@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
+
+import SearchBar from './SearchBar';
+import { SetsearchParamsContext } from '../../utils/Contexts/searchBarContext';
+
 import AppBar from '@material-ui/core/AppBar';
 import DrawerContent from './DrawerContent'
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Drawer from '@material-ui/core/Drawer';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,22 +33,34 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     alignSelf: 'center',
-    fontSize: '1em'
+    fontSize: '1em',
+    width: '100%'
   },
   drawer:{
     width: '80%'
-  }
+  },
 }));
 
-export default function ProminentAppBar() {
+const HeaderAppBar = ({renderSearch}) => {
+
   const classes = useStyles();
-  const [drawerState, setDrawerState] = useState(false)
+  const setSearchParams = useContext(SetsearchParamsContext)
+  const [drawerState, setDrawerState] = useState(false);
 
   const toggleDrawer = (state) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setDrawerState(state);
+  }
+
+  const isEmptyorWhiteSpace = (str) => {
+    const result = str === null || str.match(/^\s*$/) !== null;
+    return result
+  };
+
+  const handleSearchBarClick = (searchParams, ) => {
+    isEmptyorWhiteSpace(searchParams) ?  setSearchParams(undefined) :  setSearchParams(searchParams)
   }
 
   return (
@@ -63,9 +79,9 @@ export default function ProminentAppBar() {
           <Typography className={classes.title} variant="h5" noWrap>
             Specialised
           </Typography>
-          <IconButton aria-label="search" color="inherit">
-            <SearchIcon />
-          </IconButton>
+
+          {renderSearch && <SearchBar handleClick={handleSearchBarClick} /> }
+         
           <IconButton aria-label="display more actions" edge="end" color="inherit">
             <MoreIcon />
           </IconButton>
@@ -78,3 +94,5 @@ export default function ProminentAppBar() {
     </div>
   );
 }
+
+export default HeaderAppBar

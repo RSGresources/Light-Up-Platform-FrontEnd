@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { searchParamsContext } from '../../utils/Contexts/searchBarContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import useGetPodcasts from '../../utils/customHooks/useGetPodcasts';
 import LoadingSpinner from '../LoadSpinner/LoadSpinner';
 import PodcastCard from '../Podcasts/PodcastCard';
+
+import FuzzySearch from 'fuzzy-search'; // Or: var FuzzySearch = require('fuzzy-search');
+
 
 const useStyles = makeStyles({
   gridItem:{
@@ -13,9 +18,20 @@ const useStyles = makeStyles({
   }
 });
 
+
 const Podcasts = () => {
   const classes = useStyles();
+  const searchParams = useContext(searchParamsContext);
   const [podcastList, PodcastListError] = useGetPodcasts();
+
+  const fuzzySearch = () => {  
+    const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title','author'], {
+      caseSensitive: false, sort: true});
+    const result = searcher.search(searchParams);
+    console.log(result)
+    return result;  
+  } 
+
 
   if (!podcastList){
       return <LoadingSpinner />;
@@ -27,12 +43,20 @@ const Podcasts = () => {
 
   return (
     <Grid container spacing={3}>
-        {podcastList.map((podcast, index)=> {
+
+        {!searchParams && podcastList.map((podcast, index)=> {
             return (
-                <Grid className={classes.gridItem} item xs={12}>
+                <Grid className={classes.gridItem} item xs={12} key={index}>
                    <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
                 </Grid>
         )})}
+        {searchParams && fuzzySearch().map((podcast, index)=> {
+            return (
+                <Grid className={classes.gridItem} item xs={12} key={index}>
+                   <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
+                </Grid>
+        )})}
+
     </Grid>
   );
 }
