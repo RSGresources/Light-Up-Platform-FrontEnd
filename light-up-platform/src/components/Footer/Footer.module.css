@@ -1,5 +1,5 @@
 .Footer {
-	background-color: #C63A3A;
+	background-color: #D72832;
 	color: white;
 	flex-basis: 1.2rem;
 	display: flex;
@@ -7,4 +7,5 @@
 	justify-content: center;
 	position: sticky;
 	bottom: 0%;
+	height: 4vh;
 }
