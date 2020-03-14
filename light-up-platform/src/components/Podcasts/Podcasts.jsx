@@ -28,7 +28,6 @@ const Podcasts = () => {
     const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title','author'], {
       caseSensitive: false, sort: true});
     const result = searcher.search(searchParams);
-    console.log(result)
     return result;  
   } 
 
