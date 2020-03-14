@@ -88,7 +88,7 @@ const HeaderAppBar = ({ renderSearch }) => {
         </Toolbar>
       </AppBar>
 
-      <Drawer classes={{ paper: classes.drawer }} open={drawerState} anchor='left' onClose={toggleDrawer(false)}>
+      <Drawer classes={{ paper: classes.drawer }} onClick={toggleDrawer(false)} open={drawerState} anchor='left' onClose={toggleDrawer(false)}>
         <DrawerContent />
       </Drawer>
     </div>
