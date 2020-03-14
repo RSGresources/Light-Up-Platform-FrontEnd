@@ -21,7 +21,8 @@ const useStyles = makeStyles({
 const Podcasts = () => {
   const classes = useStyles();
   const searchParams = useContext(searchParamsContext);
-  let [podcastList, PodcastListError] = useGetPodcasts(null);
+  let [podcastList, PodcastListError] = useGetPodcasts();
+
 
 
   const fuzzySearch = () => {
