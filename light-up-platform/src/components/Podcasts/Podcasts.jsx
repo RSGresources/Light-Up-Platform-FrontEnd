@@ -24,7 +24,6 @@ const Podcasts = () => {
   let [podcastList, PodcastListError] = useGetPodcasts();
 
 
-
   const fuzzySearch = () => {
     const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title', 'author'], {
       caseSensitive: false, sort: true
