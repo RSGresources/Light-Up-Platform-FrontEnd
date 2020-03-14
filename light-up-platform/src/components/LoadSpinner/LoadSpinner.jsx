@@ -7,11 +7,19 @@ const LoadSpinner = (({ color }) => {
         colorPrimary: {
             color: color,
         },
+        alignment: {
+            flexGrow: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
     })
     const classes = useStyles();
 
     return (
-        <CircularProgress thickness={3} size={80} className={classes.colorPrimary} />
+        <div className={classes.alignment}>
+            <CircularProgress thickness={3} size={80} className={classes.colorPrimary} />
+        </div>
     )
 });
 

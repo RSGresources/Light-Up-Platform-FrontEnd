@@ -24,48 +24,48 @@ const App = () => {
     <SearchParamsProvider>
       <Router>
         <div className={AppCss.App}>
-          <AppBar renderSearch={true}/>
+          <AppBar renderSearch={true} />
           <Body>
-              <Switch>
-                <Route exact path="/">
-                  <Podcasts />
-                </Route>
-                <Route path='/Webinars'>
-                    <Webinars />
-                </Route>
-                <Route path='/Courses'>
-                    <Courses />
-                </Route>
-                <Route path='/Library'>
-                    <Library />
-                </Route>
-                <Route path='/Forums'>
-                    <Forums />
-                </Route>
-                <Route path='/Training'>
-                    <Training />
-                </Route>
-                <Route path='/WeeklyReignition'>
-                    <WeeklyReignition />
-                </Route>
-                <Route path='/AboutLightUp'>
-                    <AboutLightUp />
-                </Route>
-                <Route path='/Subscriptions'>
-                    <Subscriptions />
-                </Route>
-                <Route path='/Profile'>
-                    <Profile />
-                </Route>
-                <Route path="*">
-                  <PageNotFound />
-                </Route>
-              </Switch>
-            </Body>
-            <Footer />
+            <Switch>
+              <Route exact path="/">
+                <Podcasts />
+              </Route>
+              <Route path='/Webinars'>
+                <Webinars />
+              </Route>
+              <Route path='/Courses'>
+                <Courses />
+              </Route>
+              <Route path='/Library'>
+                <Library />
+              </Route>
+              <Route path='/Forums'>
+                <Forums />
+              </Route>
+              <Route path='/Training'>
+                <Training />
+              </Route>
+              <Route path='/WeeklyReignition'>
+                <WeeklyReignition />
+              </Route>
+              <Route path='/AboutLightUp'>
+                <AboutLightUp />
+              </Route>
+              <Route path='/Subscriptions'>
+                <Subscriptions />
+              </Route>
+              <Route path='/Profile'>
+                <Profile />
+              </Route>
+              <Route path="*">
+                <PageNotFound />
+              </Route>
+            </Switch>
+          </Body>
+          <Footer />
         </div>
       </Router>
-      </SearchParamsProvider>
+    </SearchParamsProvider>
   );
 }
 

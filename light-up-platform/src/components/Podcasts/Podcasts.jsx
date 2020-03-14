@@ -14,15 +14,15 @@ import FuzzySearch from 'fuzzy-search'; // Or: var FuzzySearch = require('fuzzy-
 const useStyles = makeStyles({
   gridItem: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 });
-
 
 const Podcasts = () => {
   const classes = useStyles();
   const searchParams = useContext(searchParamsContext);
-  const [podcastList, PodcastListError] = useGetPodcasts(null);
+  let [podcastList, PodcastListError] = useGetPodcasts(null);
+
 
   const fuzzySearch = () => {
     const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title', 'author'], {
@@ -34,7 +34,7 @@ const Podcasts = () => {
 
 
   if (!podcastList) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner color={'#d72832'} />;
   }
 
   if (PodcastListError) {
@@ -47,14 +47,14 @@ const Podcasts = () => {
       {!searchParams && podcastList.map((podcast, index) => {
         return (
           <Grid className={classes.gridItem} item xs={12} key={index}>
-            <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
+            <PodcastCard podcast={podcast} timeout={700} direction={'left'} name={index} />
           </Grid>
         )
       })}
       {searchParams && fuzzySearch().map((podcast, index) => {
         return (
           <Grid className={classes.gridItem} item xs={12} key={index}>
-            <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
+            <PodcastCard podcast={podcast} timeout={1000} direction={'left'} name={index} />
           </Grid>
         )
       })}

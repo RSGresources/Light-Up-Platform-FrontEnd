@@ -93,19 +93,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PodcastCard = ({ podcast, timeout }) => {
+const PodcastCard = ({ podcast, timeout, name, direction }) => {
 
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [lightUps, setLightUps] = useState(podcast.lightUps);
-  const [isInViewPort, setIsInViewPort] = useState(true);
+  const [isInViewPort, setIsInViewPort] = useState(false);
   const [element, setElement] = useState(null)
 
   const obsever = useRef(new IntersectionObserver((entries) => {
     const first = entries[0];
-    console.log(first)
-
-  }, { threshold: 1 }));
+    if (first.isIntersecting) {
+      setIsInViewPort(true)
+    }
+  }, { threshold: 1, rootMargin: '-15%' }));
 
 
   useEffect(() => {
@@ -134,10 +135,10 @@ const PodcastCard = ({ podcast, timeout }) => {
   return (
 
     <div>
-      {!isInViewPort && <div ref={setElement}></div>}
+      {!isInViewPort && <div className={String(name)} style={{ minHeight: '42vh' }} ref={setElement}></div>}
 
       {isInViewPort &&
-        <Slide direction="left" in={true} timeout={timeout} mountOnEnter unmountOnExit>
+        <Slide direction={direction} in={true} timeout={timeout} mountOnEnter unmountOnExit>
           <Card className={classes.root}>
             <CardContent className={classes.cardContent}>
               <div className="react player">
