@@ -165,7 +165,6 @@ const PodcastCard = ({podcast, timeout}) => {
                           {podcast.title}
                         </Typography>
                         <Typography className={classes.collapseDescription} paragraph varient='body1' color='textSecondary' component="p">
-                          {console.log(podcast.description)}
                           {podcast.description}
                         </Typography>
                   </CardContent>

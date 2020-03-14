@@ -98,9 +98,9 @@ const DrawerConent = () => {
             </div>
             <div className={classes.content}>
                 <List>
-                    {listItems.map((item) => {
+                    {listItems.map((item, index) => {
                      return(  
-                        <ListItem button onClick={() => handleOnClick(item.route)} className={classes.listButtons}>
+                        <ListItem button onClick={() => handleOnClick(item.route)} className={classes.listButtons} key={index}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText>{item.name}</ListItemText>
                         </ListItem>

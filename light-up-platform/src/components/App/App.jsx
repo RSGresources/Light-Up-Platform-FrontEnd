@@ -12,16 +12,19 @@ import WeeklyReignition from '../WeeklyReignition/WeeklyReignition';
 import AboutLightUp from '../AboutLightUp/AboutLightUp';
 import Subscriptions from '../Subscriptions/Subscriptions';
 import Podcasts from '../Podcasts/Podcasts';
+import Profile from '../Profile/Profile';
 import PageNotFound from '../ErrorPages/PageNotFound/PageNotFound';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { SearchParamsProvider } from '../../utils/Contexts/searchBarContext';
+
 
 
 const App = () => {
   return (
-    <div className="App">
+    <SearchParamsProvider>
       <Router>
         <div className={AppCss.App}>
-          <AppBar />
+          <AppBar renderSearch={true}/>
           <Body>
               <Switch>
                 <Route exact path="/">
@@ -51,6 +54,9 @@ const App = () => {
                 <Route path='/Subscriptions'>
                     <Subscriptions />
                 </Route>
+                <Route path='/Profile'>
+                    <Profile />
+                </Route>
                 <Route path="*">
                   <PageNotFound />
                 </Route>
@@ -59,7 +65,7 @@ const App = () => {
             <Footer />
         </div>
       </Router>
-    </div>
+      </SearchParamsProvider>
   );
 }
 
