@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import ReactPlayer from 'react-player'
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,11 +14,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Slide from '@material-ui/core/Slide';
 
 import { Divider } from '@material-ui/core';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '89%',
-    maxWidth: '87vw',
+    width: '100%',
+    maxWidth: '79vw',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -30,147 +31,179 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  expandMoreIcon:{
-    color:'#397FD6'
+  expandMoreIcon: {
+    color: '#397FD6'
   },
   cardContent: {
-      padding: 0
+    padding: 0
   },
-  cardContentDetails:{
+  cardContentDetails: {
     padding: '2% 2% 0% 2%',
   },
-  cardContentDetailsTitle:{
+  cardContentDetailsTitle: {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     color: 'black',
     fontWeight: 'bold'
   },
-  cardContentDetailsDateTimeContainer:{
+  cardContentDetailsDateTimeContainer: {
     display: 'flex',
   },
-  cardContentDetailsDateTime:{
+  cardContentDetailsDateTime: {
     marginRight: '2%'
   },
-  profilePicImg:{
+  profilePicImg: {
     width: '10%',
     borderRadius: '50%',
     marginRight: '2%'
   },
-  cardAuthorText:{
+  cardAuthorText: {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
   cardLightUpsIconImg: {
-      width: '69%'
+    width: '69%'
   },
-  cardLightUpsIconLabel:{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+  cardLightUpsIconLabel: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  cardLightUpsIconRoot:{
+  cardLightUpsIconRoot: {
     width: '16%',
     paddingRight: 0,
     paddingTop: 0,
     paddingBottom: 0
   },
-  cardLightUpsText:{
+  cardLightUpsText: {
     fontSize: '0.5em'
   },
   cardActions: {
     paddingTop: '1%'
   },
-  collapseTitle:{
+  collapseTitle: {
     textAlign: 'center',
     marginTop: '4%'
   },
-  collapseDescription:{
+  collapseDescription: {
     fontSize: '0.7em',
     textAlign: 'center'
   },
 }));
 
-const PodcastCard = ({podcast, timeout}) => {
+const PodcastCard = ({ podcast, timeout }) => {
 
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [lightUps, setLightUps] = useState(podcast.lightUps);
-  
+  const [isInViewPort, setIsInViewPort] = useState(true);
+  const [element, setElement] = useState(null)
+
+  const obsever = useRef(new IntersectionObserver((entries) => {
+    const first = entries[0];
+    console.log(first)
+
+  }, { threshold: 1 }));
+
+
+  useEffect(() => {
+    const currentElement = element;
+    const currentObserver = obsever.current;
+
+    if (currentElement) {
+      currentObserver.observe(currentElement);
+    }
+
+    return () => {
+      if (currentElement) {
+        currentObserver.unobserve(currentElement);
+      }
+    }
+  }, [element])
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const handleLightUpClick = () => {
-    setLightUps( lightUps + 1)
+    setLightUps(lightUps + 1)
   };
 
   return (
-      <Slide direction="left" in={true} timeout={timeout} mountOnEnter unmountOnExit>
+
+    <div>
+      {!isInViewPort && <div ref={setElement}></div>}
+
+      {isInViewPort &&
+        <Slide direction="left" in={true} timeout={timeout} mountOnEnter unmountOnExit>
           <Card className={classes.root}>
-              <CardContent className={classes.cardContent}>
-                  <div className={classes.media}>
-                      <ReactPlayer
-                          url={podcast.videoURL}
-                          controls={true}
-                          light={true}
-                          height='232px'
-                          width='100%'
-                      />
-                  </div>
-                  <div className={classes.cardContentDetails}>
-                  <div className={classes.cardContentDetailsDateTimeContainer}>
-                        <Typography className={classes.cardContentDetailsDateTime} variant="body2" color="textSecondary" component="p">
-                            {podcast.dateRecorded}
-                        </Typography>
-                        <Typography className={classes.cardContentDetailsDateTime} variant="body2" color="textSecondary" component="p">
-                            {podcast.timeRecorded}
-                        </Typography>
-                  </div>
-                      <Typography className={classes.cardContentDetailsTitle} variant="body1" color="textSecondary" component="p">
-                          {podcast.title}
-                      </Typography>                 
-                  </div>
+            <CardContent className={classes.cardContent}>
+              <div className="react player">
+                <ReactPlayer
+                  url={podcast.videoURL}
+                  controls={true}
+                  light={true}
+                  height='232px'
+                  width='100%'
+                />
+              </div>
+              <div className={classes.cardContentDetails}>
+                <div className={classes.cardContentDetailsDateTimeContainer}>
+                  <Typography className={classes.cardContentDetailsDateTime} variant="body2" color="textSecondary" component="p">
+                    {podcast.dateRecorded}
+                  </Typography>
+                  <Typography className={classes.cardContentDetailsDateTime} variant="body2" color="textSecondary" component="p">
+                    {podcast.timeRecorded}
+                  </Typography>
+                </div>
+                <Typography className={classes.cardContentDetailsTitle} variant="body1" color="textSecondary" component="p">
+                  {podcast.title}
+                </Typography>
+              </div>
+            </CardContent>
+            <CardActions classes={{ root: classes.cardActions }} disableSpacing>
+
+              <img className={classes.profilePicImg} src={podcast.authorPicURL} alt='profile pic placeholder' />
+              <Typography className={classes.cardAuthorText} variant="body1" color="textSecondary" component="p">
+                {podcast.author}
+              </Typography>
+
+              <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon className={classes.expandMoreIcon} />
+              </IconButton>
+
+              <IconButton classes={{ label: classes.cardLightUpsIconLabel, root: classes.cardLightUpsIconRoot }} onClick={handleLightUpClick} aria-label="show more" >
+                <Typography className={classes.cardLightUpsText} variant="body1" color="textSecondary" component="p">
+                  {lightUps}
+                </Typography>
+                <img className={classes.cardLightUpsIconImg} src='/icons/lightUpsIcon.png' alt='light icon' />
+              </IconButton>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Divider />
+                <Typography className={classes.collapseTitle} paragraph variant='subtitle1' color='textSecondary'>
+                  {podcast.title}
+                </Typography>
+                <Typography className={classes.collapseDescription} paragraph variant='body1' color='textSecondary' component="p">
+                  {podcast.description}
+                </Typography>
               </CardContent>
-              <CardActions classes={{root:classes.cardActions}} disableSpacing>
-
-                  <img className={classes.profilePicImg} src={podcast.authorPicURL} alt='profile pic placeholder' />
-                  <Typography className={classes.cardAuthorText} variant="body1" color="textSecondary" component="p">
-                      {podcast.author}
-                  </Typography>
-
-                  <IconButton
-                  className={clsx(classes.expand, {
-                      [classes.expandOpen]: expanded,
-                  })}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                  >
-                  <ExpandMoreIcon className={classes.expandMoreIcon} />
-                  </IconButton>
-                  
-                  <IconButton classes={{label: classes.cardLightUpsIconLabel, root: classes.cardLightUpsIconRoot}} onClick={handleLightUpClick} aria-label="show more" >
-                  <Typography className={classes.cardLightUpsText} variant="body1" color="textSecondary" component="p">
-                      {lightUps}
-                  </Typography>
-                      <img className={classes.cardLightUpsIconImg} src='/icons/lightUpsIcon.png' alt='light icon' />
-                  </IconButton>
-              </CardActions>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
-                        <Divider />
-                        <Typography className={classes.collapseTitle} paragraph varient='subtitle1' color='textSecondary'>
-                          {podcast.title}
-                        </Typography>
-                        <Typography className={classes.collapseDescription} paragraph varient='body1' color='textSecondary' component="p">
-                          {podcast.description}
-                        </Typography>
-                  </CardContent>
-              </Collapse>
+            </Collapse>
           </Card>
-      </Slide>
-  )}
+        </Slide>
+      }
+    </div>
+  )
+}
 
 export default PodcastCard;
