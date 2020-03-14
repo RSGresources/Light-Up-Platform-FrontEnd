@@ -12,49 +12,52 @@ import FuzzySearch from 'fuzzy-search'; // Or: var FuzzySearch = require('fuzzy-
 
 
 const useStyles = makeStyles({
-  gridItem:{
-      display: 'flex',
-      justifyContent: 'center'
+  gridItem: {
+    display: 'flex',
+    justifyContent: 'center',
   }
 });
-
 
 const Podcasts = () => {
   const classes = useStyles();
   const searchParams = useContext(searchParamsContext);
-  const [podcastList, PodcastListError] = useGetPodcasts();
+  let [podcastList, PodcastListError] = useGetPodcasts(null);
 
-  const fuzzySearch = () => {  
-    const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title','author'], {
-      caseSensitive: false, sort: true});
+
+  const fuzzySearch = () => {
+    const searcher = new FuzzySearch(podcastList, ['dateRecorded', 'timeRecorded', 'title', 'author'], {
+      caseSensitive: false, sort: true
+    });
     const result = searcher.search(searchParams);
-    return result;  
-  } 
-
-
-  if (!podcastList){
-      return <LoadingSpinner />;
+    return result;
   }
 
-  if (PodcastListError){
-  return <h3 style={{color: 'red'}}>{PodcastListError.message}</h3>
+
+  if (!podcastList) {
+    return <LoadingSpinner color={'#d72832'} />;
+  }
+
+  if (PodcastListError) {
+    return <h3 style={{ color: 'red' }}>{PodcastListError.message}</h3>
   }
 
   return (
     <Grid container spacing={3}>
 
-        {!searchParams && podcastList.map((podcast, index)=> {
-            return (
-                <Grid className={classes.gridItem} item xs={12} key={index}>
-                   <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
-                </Grid>
-        )})}
-        {searchParams && fuzzySearch().map((podcast, index)=> {
-            return (
-                <Grid className={classes.gridItem} item xs={12} key={index}>
-                   <PodcastCard podcast={podcast} timeout={500 + (index * 400)} />
-                </Grid>
-        )})}
+      {!searchParams && podcastList.map((podcast, index) => {
+        return (
+          <Grid className={classes.gridItem} item xs={12} key={index}>
+            <PodcastCard podcast={podcast} timeout={700} direction={'left'} name={index} />
+          </Grid>
+        )
+      })}
+      {searchParams && fuzzySearch().map((podcast, index) => {
+        return (
+          <Grid className={classes.gridItem} item xs={12} key={index}>
+            <PodcastCard podcast={podcast} timeout={1000} direction={'left'} name={index} />
+          </Grid>
+        )
+      })}
 
     </Grid>
   );
