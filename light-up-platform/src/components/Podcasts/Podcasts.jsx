@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { searchParamsContext } from '../../utils/Contexts/searchBarContext';
+import ContentNotFoundPage from '../ErrorPages/ContentsNotFoundPage/ContentsNotFoundPage'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,9 +10,16 @@ import LoadingSpinner from '../LoadSpinner/LoadSpinner';
 import PodcastCard from '../Podcasts/PodcastCard';
 
 import FuzzySearch from 'fuzzy-search'; // Or: var FuzzySearch = require('fuzzy-search');
+import { Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
+  grid: {
+    display: 'flex',
+    justifyContent: 'center',
+    height: '100vh',
+    alignItems: 'center'
+  },
   gridItem: {
     display: 'flex',
     justifyContent: 'center',
@@ -32,6 +40,25 @@ const Podcasts = () => {
     return result;
   }
 
+  const renderFuzzySearch = () => {
+    const search = fuzzySearch();
+
+    if (search.length === 0) {
+      return <ContentNotFoundPage on={true} timeout={1000} direction={'left'} />
+
+    } else {
+      return search.map((podcast, index) => {
+        return (
+          <Grid className={classes.gridItem} item xs={12} key={index}>
+            <PodcastCard podcast={podcast} timeout={1000} direction={'left'} name={index} />
+          </Grid>
+        )
+      })
+    }
+  }
+
+
+
 
   if (!podcastList) {
     return <LoadingSpinner color={'#d72832'} />;
@@ -41,8 +68,9 @@ const Podcasts = () => {
     return <h3 style={{ color: 'red' }}>{PodcastListError.message}</h3>
   }
 
+
   return (
-    <Grid container spacing={3}>
+    <Grid className={classes.grid} container spacing={3}>
 
       {!searchParams && podcastList.map((podcast, index) => {
         return (
@@ -51,14 +79,7 @@ const Podcasts = () => {
           </Grid>
         )
       })}
-      {searchParams && fuzzySearch().map((podcast, index) => {
-        return (
-          <Grid className={classes.gridItem} item xs={12} key={index}>
-            <PodcastCard podcast={podcast} timeout={1000} direction={'left'} name={index} />
-          </Grid>
-        )
-      })}
-
+      {searchParams && renderFuzzySearch()}
     </Grid>
   );
 }

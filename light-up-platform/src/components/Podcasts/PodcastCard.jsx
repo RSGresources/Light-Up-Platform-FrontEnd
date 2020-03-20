@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: '79vw',
+    minWidth: '79vw'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -56,6 +57,9 @@ const useStyles = makeStyles(theme => ({
   },
   profilePicImg: {
     width: '10%',
+    '@media (min-width:520px)': {
+      wdith: '9%'
+    },
     borderRadius: '50%',
     marginRight: '2%'
   },
@@ -65,7 +69,11 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis',
   },
   cardLightUpsIconImg: {
-    width: '69%'
+    width: '88%',
+    '@media (min-width:520px)': {
+      width: '42%',
+
+    }
   },
   cardLightUpsIconLabel: {
     display: 'flex',
@@ -93,9 +101,11 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center'
   },
   reactPlayer: {
+    height: '25vh',
     '@media (min-width:520px)': {
-      height: '33vh'
+      height: '31vh'
     }
+
   }
 }));
 
@@ -151,7 +161,7 @@ const PodcastCard = ({ podcast, timeout, name, direction }) => {
                 <ReactPlayer
                   url={podcast.videoURL}
                   controls={true}
-                  light={false}
+                  light={true}
                   height='100%'
                   width='100%'
                   wrapper='player-wrapper'
