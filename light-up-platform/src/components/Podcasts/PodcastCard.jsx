@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactPlayer from 'react-player'
+import './PodcastCard.css'
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: '79vw',
+    minWidth: '79vw'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -55,6 +57,9 @@ const useStyles = makeStyles(theme => ({
   },
   profilePicImg: {
     width: '10%',
+    '@media (min-width:520px)': {
+      wdith: '9%'
+    },
     borderRadius: '50%',
     marginRight: '2%'
   },
@@ -64,7 +69,11 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis',
   },
   cardLightUpsIconImg: {
-    width: '69%'
+    width: '88%',
+    '@media (min-width:520px)': {
+      width: '42%',
+
+    }
   },
   cardLightUpsIconLabel: {
     display: 'flex',
@@ -91,6 +100,13 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.7em',
     textAlign: 'center'
   },
+  reactPlayer: {
+    height: '25vh',
+    '@media (min-width:520px)': {
+      height: '31vh'
+    }
+
+  }
 }));
 
 const PodcastCard = ({ podcast, timeout, name, direction }) => {
@@ -141,15 +157,17 @@ const PodcastCard = ({ podcast, timeout, name, direction }) => {
         <Slide direction={direction} in={true} timeout={timeout} mountOnEnter unmountOnExit>
           <Card className={classes.root}>
             <CardContent className={classes.cardContent}>
-              <div className="react player">
+              <div className={classes.reactPlayer} >
                 <ReactPlayer
                   url={podcast.videoURL}
                   controls={true}
                   light={true}
-                  height='232px'
+                  height='100%'
                   width='100%'
+                  wrapper='player-wrapper'
                 />
               </div>
+              {/* 232px */}
               <div className={classes.cardContentDetails}>
                 <div className={classes.cardContentDetailsDateTimeContainer}>
                   <Typography className={classes.cardContentDetailsDateTime} variant="body2" color="textSecondary" component="p">
