@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 
 import SearchBar from './SearchBar';
-import { SetsearchParamsContext } from '../../utils/Contexts/searchBarContext';
 
 import AppBar from '@material-ui/core/AppBar';
 import DrawerContent from './DrawerContent'
@@ -10,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Drawer from '@material-ui/core/Drawer';
 
 
@@ -38,29 +36,20 @@ const useStyles = makeStyles(theme => ({
   },
   drawer: {
     width: '80%'
-  },
+  }
 }));
 
 const HeaderAppBar = ({ renderSearch }) => {
 
   const classes = useStyles();
-  const setSearchParams = useContext(SetsearchParamsContext)
   const [drawerState, setDrawerState] = useState(false);
+
 
   const toggleDrawer = (state) => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setDrawerState(state);
-  }
-
-  const isEmptyorWhiteSpace = (str) => {
-    const result = str === null || str.match(/^\s*$/) !== null;
-    return result
-  };
-
-  const handleSearchBarClick = (searchParams, ) => {
-    isEmptyorWhiteSpace(searchParams) ? setSearchParams(undefined) : setSearchParams(searchParams)
   }
 
   return (
@@ -80,15 +69,11 @@ const HeaderAppBar = ({ renderSearch }) => {
             Specialised
           </Typography>
 
-          {renderSearch && <SearchBar handleClick={handleSearchBarClick} />}
-
-          <IconButton aria-label="display more actions" edge="end" color="inherit">
-            <MoreIcon />
-          </IconButton>
+          {renderSearch && <SearchBar renderClearButton={true} />}
         </Toolbar>
       </AppBar>
 
-      <Drawer classes={{ paper: classes.drawer }} onClick={toggleDrawer(false)} open={drawerState} anchor='left' onClose={toggleDrawer(false)}>
+      <Drawer classes={{ paper: classes.drawer }} onClick={toggleDrawer(false)} onTouchMove={toggleDrawer(false)} open={drawerState} anchor='left' onClose={toggleDrawer(false)}>
         <DrawerContent />
       </Drawer>
     </div>

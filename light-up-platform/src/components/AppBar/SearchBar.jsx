@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { SetsearchParamsContext } from '../../utils/Contexts/searchBarContext';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -44,37 +53,84 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  clearSearchButtonInactiave: {
+    textTransform: 'none',
+    color: 'white',
+    opacity: '50%'
+  },
+  clearSerchButtonActive: {
+    opacity: '100%',
+    textTransform: 'none',
+    color: 'white',
+  },
 }));
 
 
-const SearchBar = ({ handleClick }) => {
+const SearchBar = ({ renderClearButton }) => {
   const classes = useStyles();
-
+  const setSearchParams = useContext(SetsearchParamsContext);
   const [filterParams, setfilterParams] = useState('');
+  const [clearActive, setClearActive] = useState(false);
 
   const handleSearchOnChange = (event) => {
     setfilterParams(event.target.value);
   }
 
+  const isEmptyorWhiteSpace = (str) => {
+    const result = str === null || str.match(/^\s*$/) !== null;
+    return result
+  };
+
+  const handleSearchBarClick = (searchParams) => {
+    if (isEmptyorWhiteSpace(searchParams)) {
+      setSearchParams(undefined);
+      setClearActive(false);
+
+    } else {
+      setSearchParams(searchParams);
+      setClearActive(true);
+    }
+
+
+  }
+
+  const handleClearClick = () => {
+    setSearchParams(undefined);
+    setfilterParams('');
+    setClearActive(false);
+  }
+
   return (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
+    <div className={classes.container}>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
+          <SearchIcon />
+        </div>
+        <InputBase
+          placeholder="Search…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+          onChange={handleSearchOnChange}
+          value={filterParams}
+          onKeyDown={
+            (e) => e.type === 'keydown' &&
+              (e.key === 'Enter' || e.key === 'done') &&
+              handleSearchBarClick(filterParams)
+          }
+        />
+
       </div>
-      <InputBase
-        placeholder="Search…"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        inputProps={{ 'aria-label': 'search' }}
-        onChange={handleSearchOnChange}
-        onKeyDown={
-          (e) => e.type === 'keydown' &&
-            e.key === 'Enter' &&
-            handleClick(filterParams)
-        }
-      />
+
+      {renderClearButton &&
+        <Button onClick={handleClearClick} classes={filterParams || clearActive ? { root: classes.clearSerchButtonActive } : { root: classes.clearSearchButtonInactiave }} >
+          <Typography>
+            clear
+              </Typography>
+        </Button>
+      }
     </div>
   );
 }

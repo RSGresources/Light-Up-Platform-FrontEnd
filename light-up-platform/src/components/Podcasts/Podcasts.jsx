@@ -10,7 +10,6 @@ import LoadingSpinner from '../LoadSpinner/LoadSpinner';
 import PodcastCard from '../Podcasts/PodcastCard';
 
 import FuzzySearch from 'fuzzy-search'; // Or: var FuzzySearch = require('fuzzy-search');
-import { Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
