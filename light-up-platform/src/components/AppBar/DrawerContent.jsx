@@ -62,7 +62,6 @@ const useStyles = makeStyles({
 const DrawerConent = () => {
     const classes = useStyles();
     const history = useHistory();
-    console.log(history)
     const listItems = [
         { name: 'Podcasts', icon: <RecordVoiceOverIcon />, route: '/' },
         { name: 'Webinars', icon: <AccountBoxIcon />, route: '/Webinars' },
