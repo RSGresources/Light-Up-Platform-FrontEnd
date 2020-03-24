@@ -43,6 +43,9 @@ const useStyles = makeStyles(theme => ({
     padding: '2% 2% 0% 2%',
   },
   cardContentDetailsTitle: {
+    '@media (min-width:520px)': {
+      fontSize: '1.2rem'
+    },
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -57,11 +60,11 @@ const useStyles = makeStyles(theme => ({
   },
   profilePicImg: {
     width: '10%',
-    '@media (min-width:520px)': {
-      wdith: '9%'
-    },
     borderRadius: '50%',
-    marginRight: '2%'
+    marginRight: '2%',
+    '@media (min-width:520px)': {
+      width: '7%'
+    },
   },
   cardAuthorText: {
     whiteSpace: 'nowrap',
@@ -94,11 +97,17 @@ const useStyles = makeStyles(theme => ({
   },
   collapseTitle: {
     textAlign: 'center',
-    marginTop: '4%'
+    marginTop: '4%',
+    '@media (min-width:520px)': {
+      fontSize: '1.2rem'
+    }
   },
   collapseDescription: {
     fontSize: '0.7em',
-    textAlign: 'center'
+    textAlign: 'center',
+    '@media (min-width:520px)': {
+      fontSize: '0.9em'
+    }
   },
   reactPlayer: {
     height: '25vh',

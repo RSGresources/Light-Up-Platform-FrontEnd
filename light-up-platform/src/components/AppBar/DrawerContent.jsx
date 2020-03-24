@@ -27,7 +27,7 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        height: '22%',
+        height: '21%',
         backgroundColor: '#D72832',
         padding: '6% 5% 5% 5%'
     },
@@ -46,7 +46,10 @@ const useStyles = makeStyles({
         color: 'white'
     },
     profileNameText: {
-        color: 'white'
+        color: 'white',
+        '@media (max-height:600px)': {
+            fontSize: '0.7rem',
+        },
     },
     headerTopContent: {
         display: 'flex',
@@ -54,8 +57,20 @@ const useStyles = makeStyles({
         justifyContent: 'space-between'
     },
     listButtons: {
-        paddingBottom: '5%',
+        paddingBottom: '6%',
+        '@media (max-height:600px)': {
+            paddingBottom: '4%',
+        },
+        '@media (min-height:740px)': {
+            paddingBottom: '10%',
+        }
+    },
+    listButtonText: {
+        '@media (max-height:600px)': {
+            fontSize: '0.7rem',
+        }
     }
+
 
 })
 
@@ -101,7 +116,7 @@ const DrawerConent = () => {
                         return (
                             <ListItem button onClick={() => handleOnClick(item.route)} className={classes.listButtons} key={index}>
                                 <ListItemIcon style={{ color: history.location.pathname === item.route ? '#4386F4' : null }}>{item.icon}</ListItemIcon>
-                                <ListItemText style={{ color: history.location.pathname === item.route ? '#4386F4' : null }}>{item.name}</ListItemText>
+                                <Typography className={classes.listButtonText} style={{ color: history.location.pathname === item.route ? '#4386F4' : null }}> {item.name}</Typography>
                             </ListItem>
                         )
                     })}

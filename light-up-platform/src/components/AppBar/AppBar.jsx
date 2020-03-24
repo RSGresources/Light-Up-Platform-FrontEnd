@@ -35,7 +35,13 @@ const useStyles = makeStyles(theme => ({
     width: '100%'
   },
   drawer: {
-    width: '80%'
+    width: '80%',
+    '@media (min-width:700px)': {
+      width: '50%'
+    },
+    '@media (min-width:1030px)': {
+      width: '25%'
+    }
   }
 }));
 
