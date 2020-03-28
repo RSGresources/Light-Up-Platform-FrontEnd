@@ -67,6 +67,7 @@ const DrawerConent = () => {
         { name: 'Webinars', icon: <AccountBoxIcon />, route: '/Webinars' },
         { name: 'Courses', icon: <LibraryBooksIcon />, route: '/Courses' },
         { name: 'Library', icon: <AccountBalanceIcon />, route: '/Library' },
+        { name: 'Landing Page', icon: <AccountBalanceIcon/>, route: '/LandingPage'},
         { name: 'Forums', icon: <ForumIcon />, route: '/Forums' },
         { name: 'Training', icon: <FlagIcon />, route: '/Training' },
         { name: 'Weekly Re-ignition', icon: <VpnKeyIcon />, route: '/WeeklyReignition' },

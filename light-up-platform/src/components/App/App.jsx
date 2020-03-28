@@ -5,6 +5,7 @@ import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
 import Webinars from '../Webinars/Webinars';
 import Courses from '../Courses/Courses';
+import LandingPage from '../LandingPage/LandingPage'
 import Library from '../Library/Library';
 import Forums from '../Forums/Forums';
 import Training from '../Training/Training';
@@ -35,6 +36,9 @@ const App = () => {
               </Route>
               <Route path='/Courses'>
                 <Courses />
+              </Route>
+              <Route>
+                <LandingPage path='/LandingPage'/>
               </Route>
               <Route path='/Library'>
                 <Library />
